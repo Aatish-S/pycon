@@ -59,12 +59,17 @@ SIZE = 1024
 FORMAT = "utf-8"
 
 def main():
-    reciever_thread = threading.Thread(target=reciever,)
-    sender_thread = threading.Thread(target=sender_all,)
-
+    reciever_thread = threading.Thread(target=reciever)
+    reciever_thread.start()
+    sender_thread = threading.Thread(target=sender_all)
+    sender_thread.start()
+    graphic_run = threading.Thread(target=gui.main())
+    graphic_run.start()
+    reciever_thread.join()
+    sender_thread.join()
+    graphic_run.join()
 
 
 if __name__ == "__main__":
-    gui.main()
     main()
 
