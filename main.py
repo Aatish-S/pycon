@@ -1,74 +1,35 @@
-import socket
 import gui
 import psycopg2
 import threading
+import netcon
+import platform
 
-def reciever():
-    print("[STARTING] Server is starting.")
+def sys_check():
+    system_info = platform.system()
+    if system_info == "Linux":
+        return 1
+        
+    elif system_info =="Windows":
+        return 2
 
-    server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
-    server.bind(ADDR)
-
-    server.listen()
-    print("[LISTENING] Server is listening.")
-
-    while True:
-        conn, addr = server.accept()
-        print(f"[NEW CONNECTION] {addr} connected.")
-
-        filename = conn.recv(SIZE).decode(FORMAT)
-        print(f"[RECV] Receiving the filename.")
-        file = open(filename, "w")
-        conn.send("Filename received.".encode(FORMAT))
-
-        data = conn.recv(SIZE).decode(FORMAT)
-        print(f"[RECV] Receiving the file data.")
-        file.write(data)
-        conn.send("File data received".encode(FORMAT))
-
-        file.close()
-
-        conn.close()
-        print(f"[DISCONNECTED] {addr} disconnected.")
-
-def sender_all():
-    client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
-    client.connect(ADDR)
-
-    file = open("data/yt.txt", "r")
-    data = file.read()
-
-    client.send("yt.txt".encode(FORMAT))
-    msg = client.recv(SIZE).decode(FORMAT)
-    print(f"[SERVER]: {msg}")
-
-    client.send(data.encode(FORMAT))
-    msg = client.recv(SIZE).decode(FORMAT)
-    print(f"[SERVER]: {msg}")
-
-    file.close()
-
-    client.close()
-
-IP = socket.gethostbyname(socket.gethostname())
-PORT = 4455
-ADDR = (IP, PORT)
-SIZE = 1024
-FORMAT = "utf-8"
 
 def main():
-    reciever_thread = threading.Thread(target=reciever)
-    reciever_thread.start()
-    sender_thread = threading.Thread(target=sender_all)
-    sender_thread.start()
-    graphic_run = threading.Thread(target=gui.main())
-    graphic_run.start()
-    reciever_thread.join()
-    sender_thread.join()
-    graphic_run.join()
-
+    sys = sys_check()
+    if sys == 1:
+        reciever_thread = threading.Thread(target=netcon.reciever)
+        reciever_thread.start()
+        sender_thread = threading.Thread(target=netcon.sender_all)
+        sender_thread.start()
+        sender_thread.join()
+        reciever_thread.join()
+        print("[SERVER] Server Ready")
+    elif sys == 2:
+        graphic_run = threading.Thread(target=gui.main())
+        graphic_run.start()
+        graphic_run.join()
+        print("[APP] Client Ready")
+    
+    
 
 if __name__ == "__main__":
     main()

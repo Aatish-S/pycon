@@ -3,6 +3,8 @@ import tkinter as tk
 
 LARGE_FONT= ("Verdana", 12)
 
+
+
 class pycon(tk.Tk):
 
     def __init__(self, *args, **kwargs):
@@ -35,17 +37,15 @@ class pycon(tk.Tk):
         
 class Fabric_entry(tk.Frame):
 
-    def saree_no(self,work_imp):
-        option = work_imp.get()
-        if option == "Saree":
-            sar_tot = tk.Entry(self)
-            sar_tot.place(x=100,y=100)
-            sar_lab = tk.Label(self,text="No. of Sarees")
-            sar_lab.place(x=100,y=100)
-
+    
     def __init__(self, parent, controller):
         tk.Frame.__init__(self,parent)
         option = ["Production","Sampling","Saree"]
+        client_name = tk.StringVar()
+        fabric_amount = tk.StringVar()
+        work_role = tk.StringVar()
+        client_name.set("")
+        fabric_amount.set("")
         button = tk.Label(self,text="Fabric Entry")
         button.place(x=45,y=75)
 
@@ -59,20 +59,26 @@ class Fabric_entry(tk.Frame):
 
         button4.place(x=360,y=70)
 
-        client_name = tk.Label(self,text="Client Name:").place(x=30,y=200)
-        cl_name = tk.Entry(self).place(x = 110,y = 200)
+        client_nametag = tk.Label(self,text="Client Name:").place(x=30,y=200)
+        cl_name = tk.Entry(self,textvariable=client_name).place(x = 110,y = 200)
         fb_title = tk.Label(self,text="Fabric Amount:").place(x=30,y=270)
-        fb_amount = tk.Entry(self).place(x = 160,y = 270)
+        fb_amount = tk.Entry(self,textvariable=fabric_amount).place(x = 160,y = 270)
         work_tag = tk.Label(self,text="Work Role:").place(x=30,y=235)
+
         
-        work_imp = tk.StringVar()
-        work_imp.set(option[0])
-        dpdown = tk.OptionMenu(self,work_imp,*option,command=Fabric_entry.saree_no(self,work_imp))
+
+        work_role.set(option[0])
+        dpdown = tk.OptionMenu(self,work_role,*option)
         dpdown.place(x=110,y=230)
 
-        fb_entry_button = tk.Button(self,text="Submit")
+        fb_entry_button = tk.Button(self,text="Submit",command=lambda:Fabric_entry.get_val(client_name,fabric_amount,work_role))
         fb_entry_button.place(x=100,y=320)
-        Fabric_entry.saree_no(self,work_imp)
+    
+    def get_val(client_name,fabric_amount,work_role):
+        clientele = client_name.get()
+        fb_amount = fabric_amount.get()
+        role = work_role.get()
+        print(client_name.get(),fabric_amount.get(),work_role.get())
 
 
 class Design_upload(tk.Frame):
