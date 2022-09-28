@@ -1,8 +1,9 @@
 import gui
-import psycopg2
 import threading
 import netcon
 import platform
+
+#MAKING THE CODE FUNCTIONAL FOR ALL PLATFORMS
 
 def sys_check():
     system_info = platform.system()

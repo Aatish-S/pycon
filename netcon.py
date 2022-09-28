@@ -1,4 +1,5 @@
 import socket
+from psd_tools import  PSDImage
 
 def reciever():
     print("[STARTING] Server is starting.")
@@ -54,3 +55,14 @@ PORT = 4455
 ADDR = (IP, PORT)
 SIZE = 1024
 FORMAT = "utf-8"
+
+def psd_thumbnail():
+    #PSDImage.open(psdfile).thumbnail().save(new_file_name)
+    print("")
+
+def tiff_thumbnail():
+    print("")
+
+def file_transfer(psdfile):
+    print("FILE TRANSFER ",psdfile)
+    print("")

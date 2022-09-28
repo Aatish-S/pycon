@@ -1,8 +1,11 @@
 import tkinter as tk
+from tkinter.filedialog import askopenfilename
+import netcon
+from tkinter import messagebox
+from pathlib import Path
 
 
 LARGE_FONT= ("Verdana", 12)
-
 
 
 class pycon(tk.Tk):
@@ -98,6 +101,20 @@ class Design_upload(tk.Frame):
         button4 = tk.Button(self, text="Pending", command=lambda: controller.show_frame(Pending_page))
 
         button4.place(x=360,y=70)
+
+        file_select = tk.Button(self,text="Select File",command=lambda:Design_upload.file_send())
+        file_select.place(x=110,y=230)
+
+    def file_send():
+        psdf = askopenfilename()
+        psdfile = Path(psdf).stem
+        if psdfile.endswith('.pdf'):
+            netcon.file_transfer(psdfile)
+        elif psdfile.endswith('.txt'):
+            netcon.file_transfer(psdfile)
+        else:
+            messagebox.showerror("File Error!","Please select a PSD File.")
+            print(psdfile)
 
 class Print_queue(tk.Frame):
 
