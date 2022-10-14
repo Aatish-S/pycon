@@ -49,18 +49,20 @@ class Fabric_entry(tk.Frame):
         work_role = tk.StringVar()
         client_name.set("")
         fabric_amount.set("")
+        des_1 = tk.Frame(self,bd=0,highlightthickness=0,background="#FFEEEE")
+        des_1.place(x=0, y=0, relwidth=1.0, relheight=0.09, anchor="nw")
         button = tk.Label(self,text="Fabric Entry")
-        button.place(x=45,y=75)
+        button.place(x=45,y=20)
 
         button2 = tk.Button(self, text="Design Upload",command=lambda: controller.show_frame(Design_upload))
-        button2.place(x=135,y=70)
+        button2.place(x=135,y=15)
 
         button3 = tk.Button(self, text = "Print Queue", command=lambda: controller.show_frame(Print_queue))
-        button3.place(x=255,y=70)
+        button3.place(x=255,y=15)
 
         button4 = tk.Button(self, text="Pending", command=lambda: controller.show_frame(Pending_page))
 
-        button4.place(x=360,y=70)
+        button4.place(x=360,y=15)
 
         client_nametag = tk.Label(self,text="Client Name:").place(x=30,y=200)
         cl_name = tk.Entry(self,textvariable=client_name).place(x = 110,y = 200)
@@ -88,19 +90,21 @@ class Design_upload(tk.Frame):
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
+        des_1 = tk.Frame(self,bd=0,highlightthickness=0,background="#FFEEEE")
+        des_1.place(x=0, y=0, relwidth=1.0, relheight=0.09, anchor="nw")
 
         button2 = tk.Button(self, text="Fabric Entry",command=lambda: controller.show_frame(Fabric_entry))
-        button2.place(x=35,y=70)
+        button2.place(x=35,y=15)
 
         des_lab = tk.Label(self,text = "Design Upload")
-        des_lab.place(x=150,y=75)
+        des_lab.place(x=150,y=20)
 
         button3 = tk.Button(self, text = "Print Queue", command=lambda: controller.show_frame(Print_queue))
-        button3.place(x=255,y=70)
+        button3.place(x=255,y=15)
 
         button4 = tk.Button(self, text="Pending", command=lambda: controller.show_frame(Pending_page))
 
-        button4.place(x=360,y=70)
+        button4.place(x=360,y=15)
 
         file_select = tk.Button(self,text="Select File",command=lambda:Design_upload.file_send())
         file_select.place(x=110,y=230)
@@ -120,36 +124,40 @@ class Print_queue(tk.Frame):
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
+        des_1 = tk.Frame(self,bd=0,highlightthickness=0,background="#FFEEEE")
+        des_1.place(x=0, y=0, relwidth=1.0, relheight=0.09, anchor="nw")
         
         button2 = tk.Button(self, text="Fabric Entry",command=lambda: controller.show_frame(Fabric_entry))
-        button2.place(x=35,y=70)
+        button2.place(x=35,y=15)
 
         des_lab = tk.Button(self,text = "Design Upload",command=lambda: controller.show_frame(Design_upload))
-        des_lab.place(x=140,y=70)
+        des_lab.place(x=140,y=15)
 
         button3 = tk.Label(self, text = "Print Queue")
-        button3.place(x=270,y=75)
+        button3.place(x=270,y=20)
 
         button4 = tk.Button(self, text="Pending", command=lambda: controller.show_frame(Pending_page))
 
-        button4.place(x=360,y=70)
+        button4.place(x=360,y=15)
         
 class Pending_page(tk.Frame):
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
+        des_1 = tk.Frame(self,bd=0,highlightthickness=0,background="#FFEEEE")
+        des_1.place(x=0, y=0, relwidth=1.0, relheight=0.09, anchor="nw")
         button2 = tk.Button(self, text="Fabric Entry",command=lambda: controller.show_frame(Fabric_entry))
-        button2.place(x=35,y=70)
+        button2.place(x=35,y=15)
 
         des_lab = tk.Button(self,text = "Design Upload",command=lambda: controller.show_frame(Design_upload))
-        des_lab.place(x=140,y=70)
+        des_lab.place(x=140,y=15)
 
         button3 = tk.Button(self, text = "Print Queue",command=lambda: controller.show_frame(Print_queue))
-        button3.place(x=265,y=70)
+        button3.place(x=265,y=15)
 
         button4 = tk.Label(self, text="Pending")
 
-        button4.place(x=370,y=75)
+        button4.place(x=370,y=20)
 
 
 def main():
