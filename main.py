@@ -28,7 +28,7 @@ def main():
         graphic_run = threading.Thread(target=gui.main())
         graphic_run.start()
         graphic_run.join()
-        print("[APP] Client Ready")
+        print("[APPLIC] Client Ready")
     
     
 

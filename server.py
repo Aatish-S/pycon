@@ -3,6 +3,9 @@ import sqlite3
 import os
 
 global db_name
+global dir
+base_dir = os.getcwd()
+dir = base_dir+"/PYCON"
 db_name = "True_colors.db"
 
 def create_new_database():
@@ -40,12 +43,12 @@ data_out_D = "select * from design;"
 data_in_FE = "insert into fabric_entry values("
 
 def base_read():
+    os.chdir(dir)
     conn = sqlite3.connect(db_name)
     cursor = conn.cursor()
-    for row in cursor.execute(data_out_D):
+    for row in cursor.execute(data_out_FE):
         print(row)
 
-    conn.commit()
     conn.close()
 
 def base_write(selc,data):
@@ -67,5 +70,6 @@ def base_write(selc,data):
 
     conn.commit()
     conn.close()
-    
+
+base_read()
 # SO FOR DATABASE INPUT ALWAYS USE COMMIT TO SAVE THE VALUES TO THE DATABASE
